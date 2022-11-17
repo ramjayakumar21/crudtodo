@@ -35,6 +35,10 @@ router.post('/filtertask', (req, res) => {
     res.redirect('/')
 })
 
+router.post('/login', (req, res) => {
+    res.redirect('/login')
+}) 
+
 
 
 module.exports = router;

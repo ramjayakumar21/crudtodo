@@ -4,47 +4,49 @@
     <link href="/style.css" rel="stylesheet">
   </head>
 <body>
-  <h2>My TODO List</h2>
-  <form action ="/api/addtask" method="POST">
-    <input type="text" name="taskTitle" placeholder="add new task">  
-    <select id="priority" name="priority">
-      <option value="High">High</option>
-      <option value="Medium">Medium</option>
-      <option value="Low">Low</option>
-    </select>   
-    <button>Add Task</button>
-  </form>
-    <h2>Tasks</h2>
-    <p>Current priority filter: <%=pfilter %></p>
-    <form action="/api/filtertask" method="POST">
-      <select id="filterval" name="filterval">
-        <option value="ALL">All</option>
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-      </select>
-      <button>Filter Tasks</button>
-    </form>
-    <table>
-      <tr>
-        <th>Status</th>
-        <th>Title</th>
-        <th>Owner</th>
-        <th>Priority</th>
-      </tr>
-      <% for(var i = 0; i < todoList.length; i++){ 
-          console.log("p" + todoList[i].priority);
-          console.log("a" + pfilter);
-          if (todoList[i].priority != pfilter && pfilter != "ALL") {continue;} %>
-    <tr>
-        <td><input type="<%= (todoList[i].owner == username) ? `checkbox` : `hidden` %>" name="check" value="<%= todoList[i].owner%>" /></td>
-        <td><%= todoList[i].title %></td>
-        <td><%= todoList[i].owner %></td>
-        <td><%= todoList[i].priority %></td>
-    </tr>
-    <% } %>
-    </table>
-      <button formaction="/api/removetask" type="submit"> Remove </button>
-  
+  <div class="content">
+    <div>
+      <h2>My TODO List</h2>
+      <form action ="/api/addtask" method="POST">
+        <input type="text" name="taskTitle" placeholder="add new task">
+        <select id="priority" name="priority">
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <button>Add Task</button>
+        <p>Current priority filter: <%=pfilter %></p>
+        <form action="/api/filtertask" method="POST">
+          <select id="filterval" name="filterval">
+            <option value="ALL">All</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <button>Filter Tasks</button>
+        </form>
+        <table>
+          <tr>
+            <th>Status</th>
+            <th>Title</th>
+            <th>Owner</th>
+            <th>Priority</th>
+          </tr>
+          <% for(var i = 0; i < todoList.length; i++){
+              console.log("p" + todoList[i].priority);
+              console.log("a" + pfilter);
+              if (todoList[i].priority != pfilter && pfilter != "ALL") {continue;} %>
+        <tr>
+            <td><input type="<%= (todoList[i].owner == username) ? `checkbox` : `hidden` %>" name="check" value="<%= todoList[i].owner%>" /></td>
+            <td><%= todoList[i].title %></td>
+            <td><%= todoList[i].owner %></td>
+            <td><%= todoList[i].priority %></td>
+        </tr>
+        <% } %>
+        </table>
+          <button formaction="/api/removetask" type="submit"> Remove selected task</button>
+        </form>
+    </div>
+  </div>
 </body>
 </html>

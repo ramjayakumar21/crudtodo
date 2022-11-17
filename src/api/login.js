@@ -3,8 +3,6 @@ const router = express.Router();
 const bodyParser = require("body-parser");
 const mysql = require('mysql');
 const session = require('express-session');
-const path = require('path');
-let taskList = require('./todos')
 
 router.use(session({
 	secret: 'secret',
@@ -31,6 +29,7 @@ router.post("/", (req, res) => {
     if (username && password) {
 		connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', 
             [username, password], (err, results, fields) => {
+
 			if (err) throw err;
 
             // Check is account exists
@@ -45,8 +44,9 @@ router.post("/", (req, res) => {
 			}			
 		});
 	} else {
-		res.send('Please enter Username and Password!');
-	}
+        res.send('Please enter Username and Password!');
+    }
+	
   });
 
 
