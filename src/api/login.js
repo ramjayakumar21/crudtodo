@@ -27,6 +27,7 @@ router.post("/", (req, res) => {
     let password = req.body.password;
 
     if (username && password) {
+		// gets username and password from database and checks if equivalent
 		connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', 
             [username, password], (err, results, fields) => {
 

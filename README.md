@@ -1,0 +1,1 @@
+This is a simple CRUD todo app made using Node.js. It has simple user authentication using a mySQL database, and allows users to view all tasks present but only modify ones they created. Users can filter tasks based on priority, and add tasks as well.

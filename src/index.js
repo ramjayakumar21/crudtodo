@@ -3,12 +3,11 @@ const api = require('./api');
 const login = require('./api/login.js');
 const session = require('express-session');
 let taskList = require('./api/todos')
-const dotenv = require("dotenv");
-dotenv.config();
 
 const app = express();
 const PORT = 4001;
 
+// figured out how to use this from the internet
 app.use(session({
 	secret: 'secret',
 	resave: true,
@@ -20,7 +19,7 @@ app.use(session({
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 app.use("/static", express.static('public'));
-
+ 
 app.get('/', (req, res) => {
     let loggedin = req.session.loggedin
     if (loggedin == null || loggedin == false) {
@@ -35,5 +34,5 @@ app.use('/api', api);
 app.use('/login', login);
 
 app.listen(PORT, () => {
-    console.log(`listening to at http://localhost:${PORT}` )
+    console.log(`listening at http://localhost:${PORT}` )
 })
