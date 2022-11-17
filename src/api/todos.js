@@ -2,7 +2,8 @@
 todoList = [
     {
         title: "Do math hw",
-        owner: "Ram"
+        owner: "Ram",
+        priority: "Low"
     }
 ]
 
