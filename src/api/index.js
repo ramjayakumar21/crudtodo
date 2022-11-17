@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require("body-parser");
 let taskList = require('./todos')
-
-
 router.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -27,6 +25,13 @@ router.post('/removetask', (req, res) => {
             taskList.splice(taskList.indexOf(taskToRemove[i]), 1);
         }
     }
+    res.redirect('/')
+})
+
+
+router.post('/filtertask', (req, res) => {
+    req.session.pfilter = req.body.filterval;
+    
     res.redirect('/')
 })
 

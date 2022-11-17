@@ -3,12 +3,6 @@ const api = require('./api');
 const login = require('./api/login.js');
 const session = require('express-session');
 let taskList = require('./api/todos')
-
-
-
-
-
-
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -19,7 +13,8 @@ app.use(session({
 	secret: 'secret',
 	resave: true,
 	saveUninitialized: true,
-    loggedin: false
+    loggedin: false,
+    pfilter: "ALL"
 }));
 
 app.use(express.static("public"));
@@ -31,27 +26,10 @@ app.get('/', (req, res) => {
     if (loggedin == null || loggedin == false) {
         res.redirect("/login")
     } else {
-        res.render('index', {taskList, username: req.session.username})
+        //console.log(req.session.pfilter)
+        res.render('index', {taskList, username: req.session.username, pfilter: req.session.pfilter})
     }
-    
-
-
 })
-
-// app.get('/:loggedin=false', (req, res)=> {
-//     let urlParams = new URLSearchParams(req.originalUrl);
-//     const product = urlParams.get('loggedin')
-//     console.log(product);
-// })
-
-function authn (req, res, next) {
-    if (req.method === 'GET') { 
-      // Do some code
-    }
- 
-    // keep executing the router middleware
-    next()
- }
 
 app.use('/api', api);
 app.use('/login', login);
